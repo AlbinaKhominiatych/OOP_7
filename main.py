@@ -1,20 +1,22 @@
-#функтори
-#метод __call__
-import time
-class Timer:
-    def __init__(self, func):
-        self.func = func
+"""Створіть клас Calculator, який може виконувати
+операції додавання, віднімання, множення та ділення.
+Кожна операція буде реалізована як метод класу.
+Об'єкт класу Calculator буде функтором, що може
+викликатися для виконання обраної операції."""
+
+
+class Calculator:
+    # сюди додати усі інші операції
+    def divide(self, a, b):
+        if b == 0:
+            raise ZeroDivisionError("Ділити на нуль не можна!")
+        return  a / b
 
     def __call__(self, *args, **kwargs):
-        start = time.time()
-        print(f"Викликаємо функцію {self.func.__name__}")
-        result = self.func(*args, **kwargs)
-        end = time.time()
-        print(f"Функція виконувалася {end - start:.5f}" )
-        return result
+        match args[0]:
+            # сюди додати усі інші операції
+            case "/": return self.divide(args[1], args[2])
+            case _  : return "немає такої операції"
 
-@Timer
-def summa():
-    return sum(range(1, 100000))
-
-print(summa())
+calcutate = Calculator()
+print(calcutate("/", 4, 2))
